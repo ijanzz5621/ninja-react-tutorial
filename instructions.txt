@@ -1,0 +1,40 @@
+Ninja - FullReact Tutorial#1
+----------------------------
+Initial Video: https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
+Current Video: 
+https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
+Stop at: 0:24
+
+1. Install / Create new react application using below command:
+
+    npm create vite@latest
+
+    a. Enter project name
+    b .Select react
+    c. Select Typescript
+
+2. Install Bootstrap
+
+    npm install bootstrap@5.2.3 or bootstrap@latest
+
+3. Install package and run
+
+    npm install
+    npm run dev
+
+4. VS Code Extension:
+
+    1. Prettier
+    2. Simple React Snippets
+    3. ES7+
+
+5. Enable Format on Save:
+
+    1. After install prettier, go to Preference -> Settings
+    2. Search for Format on Save -> Check the checkbox
+    3. If not able to format during save, press Ctrl + Shift + P and search Format Document
+    4. It should show popup to resolve conflict.
+    5. Click the resolve button and choose 'Prettier'
+
+
+
