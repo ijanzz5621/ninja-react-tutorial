@@ -1,9 +1,16 @@
 Ninja - FullReact Tutorial#1
 ----------------------------
 Initial Video: https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
+
 Current Video: 
-https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
-Stop at: 0:24
+Title:
+Full React Tutorial #3 - Components & Templates
+
+Link:
+https://www.youtube.com/watch?v=9D1x7-2FmTA&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=3
+
+Stop at: 
+0:00
 
 1. Install / Create new react application using below command:
 
