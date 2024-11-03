@@ -1,24 +1,19 @@
 // import { MouseEvent } from "react";
+import useFetch from "../hooks/useFetch";
 import BlogList from "./BlogList";
 
-import { useState, useEffect } from "react";
-
-interface blog {
-  id: number;
-  title: string;
-  author: string;
-  body: string;
-}
-
 const Home = () => {
-  const [blogs, setBlogs] = useState([] as blog[]);
-  //const [name, setName] = useState("Sharizan");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null as unknown as string);
+  // rename data to blogs
+  const {
+    data: blogs,
+    isLoading,
+    error,
+  } = useFetch("http://localhost:8000/blogs");
 
   const handleDelete = (id: number) => {
-    const newBlogs = blogs.filter((blog) => blog.id !== id);
-    setBlogs(newBlogs);
+    //const newBlogs = data.filter((blog) => blog.id !== id);
+    //setData(newBlogs);
+    console.log("id: " + id, " has been deleted!");
   };
 
   //let name = "Mario";
@@ -42,34 +37,6 @@ const Home = () => {
 
   // // temp
   // handleBlogs();
-
-  // Can use this useEffect to fetch data
-  useEffect(() => {
-    // setTimeOut -> to simulate data that slow and only reached after 2 seconds
-    setTimeout(() => {
-      // get data
-      fetch("http://localhost:8000/blogs")
-        .then((res) => {
-          // console.log(res);
-          if (!res.ok) {
-            throw Error("could not fetch the blog data. status: " + res.status);
-          }
-          return res.json();
-        })
-        .then((data) => {
-          // set error back to null
-          setError(null as unknown as string);
-          setBlogs(data);
-        })
-        .catch((err: Error) => {
-          console.log("Error retriving blog data. Error: ", err);
-          setError(err.message);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }, 2000);
-  }, []); // "[]" leave it empty/remove if to run this functions once during component load
 
   return (
     <div className="home">
