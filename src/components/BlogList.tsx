@@ -3,6 +3,7 @@
 interface Props {
   title: string;
   blogs: blog[];
+  handleDelete: (id: number) => void;
 }
 
 interface blog {
@@ -11,7 +12,7 @@ interface blog {
   author: string;
 }
 
-const BlogList = ({ title, blogs }: Props) => {
+const BlogList = ({ title, blogs, handleDelete }: Props) => {
   return (
     <div className="blog-list">
       <h3>{title}</h3>
@@ -19,6 +20,13 @@ const BlogList = ({ title, blogs }: Props) => {
         <div className="blog-preview" key={blog.id}>
           <h2>{blog.title}</h2>
           <p>Written by: {blog.author}</p>
+          <button
+            onClick={() => {
+              handleDelete(blog.id);
+            }}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </div>

@@ -1,35 +1,25 @@
 // import { MouseEvent } from "react";
 import BlogList from "./BlogList";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+interface blog {
+  id: number;
+  title: string;
+  author: string;
+  body: string;
+}
 
 const Home = () => {
-  const [blogs, setBlogs] = useState([
-    {
-      title: "My New Website",
-      body: "This is my new website",
-      author: "sharizan",
-      id: 1,
-    },
-    {
-      title: "Welcome Party!",
-      body: "Welcome to my party!",
-      author: "safinaz",
-      id: 2,
-    },
-    {
-      title: "Home Decoration",
-      body: "Home decoration for a new house",
-      author: "dalila",
-      id: 3,
-    },
-    {
-      title: "Home Renovation!",
-      body: "Home Renovation for a new house",
-      author: "sharizan",
-      id: 4,
-    },
-  ]);
+  const [blogs, setBlogs] = useState([] as blog[]);
+  //const [name, setName] = useState("Sharizan");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null as unknown as string);
+
+  const handleDelete = (id: number) => {
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
+    setBlogs(newBlogs);
+  };
 
   //let name = "Mario";
 
@@ -53,6 +43,34 @@ const Home = () => {
   // // temp
   // handleBlogs();
 
+  // Can use this useEffect to fetch data
+  useEffect(() => {
+    // setTimeOut -> to simulate data that slow and only reached after 2 seconds
+    setTimeout(() => {
+      // get data
+      fetch("http://localhost:8000/blogs")
+        .then((res) => {
+          // console.log(res);
+          if (!res.ok) {
+            throw Error("could not fetch the blog data. status: " + res.status);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // set error back to null
+          setError(null as unknown as string);
+          setBlogs(data);
+        })
+        .catch((err: Error) => {
+          console.log("Error retriving blog data. Error: ", err);
+          setError(err.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }, 2000);
+  }, []); // "[]" leave it empty/remove if to run this functions once during component load
+
   return (
     <div className="home">
       {/* <h2>Homepage</h2>
@@ -66,13 +84,31 @@ const Home = () => {
         Click me again
       </button> */}
 
-      <BlogList title="All Blogs" blogs={blogs} />
+      {isLoading && <div>Loading...</div>}
+      {error && <div>Error loading blogs: {error}</div>}
+      {blogs.length > 0 && (
+        <BlogList
+          title="Blogs available"
+          blogs={blogs}
+          handleDelete={handleDelete}
+        />
+      )}
 
       {/* filtered blogs */}
-      <BlogList
+      {/* <BlogList
         title="Sharizan's blogs"
         blogs={blogs.filter((blog) => blog.author === "sharizan")}
-      />
+        handleDelete={handleDelete}
+      /> */}
+
+      {/* <button
+        onClick={() => {
+          setName("Safinaz");
+        }}
+      >
+        Change name value
+      </button>
+      <p>{name}</p> */}
     </div>
   );
 };
