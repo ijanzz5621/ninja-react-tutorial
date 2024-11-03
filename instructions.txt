@@ -46,6 +46,7 @@ Stop at:
 
 6. To test a dummy API, can use below command to install and run json-server:
 
+    // npx = (temporary package) it will install and remove the package once stop/cancel
     npx json-server --watch data/db.json --port 8000
 
     json-server endpoints:
